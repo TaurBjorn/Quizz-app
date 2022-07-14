@@ -25,7 +25,21 @@ h1 {
     color: white;
     background-color: blue;
     transform: translate(-15%, -50%);
-    display: none; 
+    text-transform: uppercase;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.1) ;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+    /*display: none;*/
+}
+
+#start-button:hover, #start-button:focus, #start-button:active {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0, 0.5);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 #quizz-interface {
@@ -35,6 +49,7 @@ h1 {
     border-radius: 25px;
     background-color: azure;
     opacity: 0.25;
+    display: none;
 }
 
 .question {
