@@ -69,11 +69,25 @@ const loadQuiz = () => {
     
 }
 
+/*
+function getSelected() {
+    const answers = document.querySelectorAll('answer');
+
+    answers.forEach(answer => {
+        console.log(answer.checked);
+    });
+}
+*/
+
 loadQuiz();
+
 
 
 submitButton.addEventListener('click', () => {
     currentQuiz++;
+
+    // getSelected();
+    
     
     if(currentQuiz < quizData.length) {
         loadQuiz();       
@@ -81,4 +95,5 @@ submitButton.addEventListener('click', () => {
     } else {
         alert('You finished the quizz, congratulations!');
     }
+    
 });
