@@ -41,7 +41,8 @@ const quizData = [
     }
 ];
 
-
+const answerEls = document.querySelectorAll('.answer');
+const quizz = document.querySelector('#quizz');
 const question = document.getElementById('question');
 const a_text = document.getElementById('a_text');
 const b_text = document.getElementById('b_text');
@@ -53,11 +54,14 @@ const submitButton = document.getElementById('submit');
 
 
 let currentQuiz = 0;
+let answer = undefined;
+let score = 0;
 
 
 
 const loadQuiz = () => {
-   
+    deselectAnswers();
+
     const currentQuizData = quizData[currentQuiz];
 
     question.innerText = currentQuizData.question;
@@ -69,31 +73,43 @@ const loadQuiz = () => {
     
 }
 
-/*
-function getSelected() {
-    const answers = document.querySelectorAll('answer');
 
-    answers.forEach(answer => {
-        console.log(answer.checked);
+function getSelected() {
+    let answer = undefined;
+
+    answerEls.forEach(answerEl => {
+        if(answerEl.checked) {
+            answer = answerEl.id;
+        }
     });
+
+    return answer;
 }
-*/
+
 
 loadQuiz();
+
+function deselectAnswers() {
+    answerEls.forEach((answerEl) => {
+        answerEl.checked = false;
+    })
+}
 
 
 
 submitButton.addEventListener('click', () => {
-    currentQuiz++;
 
-    // getSelected();
-    
-    
-    if(currentQuiz < quizData.length) {
-        loadQuiz();       
-            
-    } else {
-        alert('You finished the quizz, congratulations!');
+    const answer = getSelected();
+
+    if(answer) {
+        if(answer === quizData[currentQuiz].correct) {
+            score++;
+        }
+        currentQuiz++;
+        if (currentQuiz < quizData.length) {
+            loadQuiz();
+        } else {
+            quizz.innerHTML = `<h2>You answered correctly at ${score}/${quizData.length} questions.</h2> <button onClick="location.reload()">Start Again</button>`;
+        }
     }
-    
 });
